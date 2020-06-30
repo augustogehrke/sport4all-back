@@ -50,4 +50,23 @@ router.delete('/:id', AuthMiddleware.verifyToken, async (req, res) => {
   }
 })
 
+router.post('/:id/participants', AuthMiddleware.verifyToken, async (req, res) => {
+  try {
+    const { body } = req
+    const data = await EventController.addParticipant(body, req.params.id)
+    res.json(data)
+  } catch (error) {
+    res.status(500).json({ error: { message: error.message, name: error.name } })
+  }
+})
+
+router.get('/:id/participants', AuthMiddleware.verifyToken, async (req, res) => {
+  try {
+    const data = await EventController.getParticipants(req.params.id)
+    res.json(data)
+  } catch (error) {
+    res.status(500).json({ error: { message: error.message, name: error.name } })
+  }
+})
+
 module.exports = router

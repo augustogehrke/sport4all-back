@@ -70,6 +70,29 @@ class EventModel {
       throw error
     }
   }
+
+  async addParticipant (data, id) {
+    try {
+      const participant = await this.collection.doc(id).collection('participants').doc().set(data)
+      return participant
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async getParticipants (id) {
+    const doc = this.collection.doc(id)
+
+    let participants = doc.collection('participants').get().then((snapshot) => {
+      const data = []
+      snapshot.forEach(doc => {
+        data.push({ ...doc.data(), id: doc.id })
+      })
+      return data
+    })
+
+    return participants
+  }
 }
 
 module.exports = new EventModel()

@@ -45,6 +45,24 @@ class EventController {
       throw error
     }
   }
+
+  async addParticipant (data, id) {
+    try {
+      const result = await EventModel.addParticipant(data, id)
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async getParticipants (id) {
+    try {
+      const data = await EventModel.getParticipants(id)
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 module.exports = new EventController()
