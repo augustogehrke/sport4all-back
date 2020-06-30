@@ -73,8 +73,11 @@ class EventModel {
 
   async addParticipant (data, id) {
     try {
-      const participant = await this.collection.doc(id).collection('participants').doc().set(data)
-      return participant
+      const participantId = this.collection.doc(id).collection('participants').add(data).then(doc => {
+        return doc.id
+      })
+
+      return participantId
     } catch (error) {
       throw error
     }
