@@ -4,8 +4,8 @@
   "author": "augusto.gehrke",
   "private": true,
   "scripts": {
-    "start": "node ./start",
-    "dev": "nodemon ./start"
+    "start": "node ./index",
+    "dev": "nodemon ./index"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
