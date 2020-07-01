@@ -55,6 +55,15 @@ class EventController {
     }
   }
 
+  async destroyParticipant (id, idParticipant) {
+    try {
+      const success = await EventModel.destroyParticipant(id, idParticipant)
+      return success
+    } catch (error) {
+      throw error
+    }
+  }
+
   async getParticipants (id) {
     try {
       const data = await EventModel.getParticipants(id)

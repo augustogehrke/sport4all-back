@@ -69,4 +69,13 @@ router.get('/:id/participants', AuthMiddleware.verifyToken, async (req, res) => 
   }
 })
 
+router.delete('/:id/participants/:idParticipant', AuthMiddleware.verifyToken, async (req, res) => {
+  try {
+    const data = await EventController.destroyParticipant(req.params.id, req.params.idParticipant)
+    res.json(data)
+  } catch (error) {
+    res.status(500).json({ error: { message: error.message, name: error.name } })
+  }
+})
+
 module.exports = router

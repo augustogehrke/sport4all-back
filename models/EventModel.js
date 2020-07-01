@@ -83,6 +83,17 @@ class EventModel {
     }
   }
 
+  async destroyParticipant (id, idParticipant) {
+    try {
+      const doc = this.collection.doc(id)
+      const participant = doc.collection('participants').doc(idParticipant)
+      participant.delete()
+      return true
+    } catch (error) {
+      throw error
+    }
+  }
+
   async getParticipants (id) {
     const doc = this.collection.doc(id)
 
