@@ -64,9 +64,18 @@ class EventModel {
   async destroy (id) {
     try {
       const doc = this.collection.doc(id)
+      const participantsDeleted = await doc.collection('participants').get().then((snapshot) => {
+        snapshot.forEach(doc => {
+          doc.ref.delete()
+        })
+        return true
+      })
+
       doc.delete()
-      return true
+
+      return participantsDeleted
     } catch (error) {
+      console.log(error)
       throw error
     }
   }
