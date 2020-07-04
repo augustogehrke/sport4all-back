@@ -1,3 +1,4 @@
+const functions = require('firebase-functions')
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -13,5 +14,7 @@ app.use(bearerToken())
 // Rotas
 app.use('/events', events)
 
-app.listen(3000)
-console.log(`Server listening on port 3000`)
+
+// app.listen(3001)
+// console.log(`Server listening on port 3000`)
+exports.api = functions.https.onRequest(app)
