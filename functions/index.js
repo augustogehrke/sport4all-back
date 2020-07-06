@@ -7,13 +7,12 @@ const events = require('./routes/events')
 const app = express()
 require('./configs/firebase')
 
-app.use(cors())
-app.use(bodyParser.json({limit: '5mb'}))
+app.use(cors({ origin: 'https://sport4all.com.br' }))
+app.use(bodyParser.json({ limit: '5mb' }))
 app.use(bearerToken())
 
 // Rotas
 app.use('/events', events)
-
 
 // app.listen(3001)
 // console.log(`Server listening on port 3000`)
